@@ -1,0 +1,25 @@
+{
+    "project_name": "Angular Dashboard",
+    "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
+    "description": "Dashboard web application in Angular.",
+    "author_name": "Jay Trivedi",
+    "email": "hello@jaytrivedi.dev",
+    "version": "0.1.0",
+    "open_source_license": [
+      "MIT",
+      "BSD",
+      "GPLv3",
+      "Apache Software License 2.0",
+      "Not open source"
+    ],  
+    "api_domain": "http://localhost:5000",
+    "api_base_url": "/api/",
+    "add_robots_txt": "n",
+    "add_sitemap": "n",
+    "is_install_npm": "y",
+    "initialize_git": "y",
+    "first_commit": "y",
+    "add_docker": "y",
+    "add_docker_compose": "y",
+    "_copy_without_render": []
+}

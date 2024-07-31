@@ -21,6 +21,15 @@ Additional labels for pre-release and build metadata are available as extensions
 
 ### Added
 
+- Angular 17
+- Tailwindcss
+- Pre-build Login page
+- Pre-build Sign up page
+- Pre-build Dashboard
+- Pre-build 404 page
+- Auth guard
+- Common service for utility functions
+
 ### Changed
 
 ### Fixed
