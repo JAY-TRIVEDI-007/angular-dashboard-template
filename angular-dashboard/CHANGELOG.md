@@ -26,7 +26,7 @@ Additional labels for pre-release and build metadata are available as extensions
 ### Fixed
 
 
-## [1.0.0] - YYYYY-MM-DD
+## [1.0.0] - YYYY-MM-DD
 
 ### Added
 
