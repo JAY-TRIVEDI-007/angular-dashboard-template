@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://{{cookiecutter.site_name}}/sitemap.xml

@@ -27,7 +27,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {% if cookiecutter.add_robots_txt == "y" %}"src/robots.txt",{% endif %}
+              {% if cookiecutter.add_sitemap == "y" %}"src/sitemap.xml"{% endif %}
             ],
             "styles": [
               "src/styles.scss"
