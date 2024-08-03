@@ -16,7 +16,12 @@ export const routes: Routes = [
     path: '',
     loadComponent: () => import('./dashboard/dashboard.component').then(c => c.DashboardComponent),
     pathMatch: 'full',
-    data: {title: 'Welcome to dashboard!'}
+    data: {title: 'Welcome to dashboard!', isAuthorizedView: true}
   },
-  {path: '**', component: PageNotFoundComponent, pathMatch: 'full', data: {title: 'Page not found'}},
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+    pathMatch: 'full',
+    data: {title: 'Page not found'}
+  },
 ];
