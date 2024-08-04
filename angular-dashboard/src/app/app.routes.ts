@@ -13,6 +13,16 @@ export const routes: Routes = [
     data: {title: 'Signup to app'}
   },
   {
+    path: 'profile',
+    loadComponent: () => import('./user/profile/profile.component').then(c => c.ProfileComponent),
+    data: {title: 'Welcome User!', isAuthorizedView: true}
+  },
+  {
+    path: 'users',
+    loadComponent: () => import('./user/user-manager/user-manager.component').then(c => c.UserManagerComponent),
+    data: {title: 'Manage App users', isAuthorizedView: true}
+  },
+  {
     path: '',
     loadComponent: () => import('./dashboard/dashboard.component').then(c => c.DashboardComponent),
     pathMatch: 'full',

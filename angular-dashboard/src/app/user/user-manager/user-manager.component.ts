@@ -2,16 +2,16 @@ import {Component, inject} from '@angular/core';
 import {CommonService} from '../../shared/services/common.service';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'app-user-manager',
   standalone: true,
   imports: [],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  templateUrl: './user-manager.component.html',
+  styleUrl: './user-manager.component.scss'
 })
-export class ProfileComponent {
+export class UserManagerComponent {
   private commonService: CommonService = inject(CommonService);
 
   ngOnInit() {
-    this.commonService.headerTitle.set('Your Profile');
+    this.commonService.headerTitle.set('Manage Users');
   }
 }

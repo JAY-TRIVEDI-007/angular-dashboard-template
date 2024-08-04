@@ -6,6 +6,7 @@ import {NgIf} from '@angular/common';
 import {filter} from 'rxjs';
 import {CommonService} from './shared/services/common.service';
 import {routes} from './app.routes';
+import {AuthService} from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent {
   title = 'angular-dashboard';
   isShowHeaderFooter = false;
 
-  constructor(private _router: Router, private commonService: CommonService) {
+  constructor(private _router: Router, private commonService: CommonService, private authService: AuthService) {
     this.setAuthorizedViews();
 
     this._router.events.pipe(
@@ -40,5 +41,10 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  logoutUser(): void {
+    this.authService.logoutUser();
+    this._router.navigate(['/login']);
   }
 }
