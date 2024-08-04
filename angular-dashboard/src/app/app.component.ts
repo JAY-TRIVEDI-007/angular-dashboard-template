@@ -7,11 +7,12 @@ import {filter} from 'rxjs';
 import {CommonService} from './shared/services/common.service';
 import {routes} from './app.routes';
 import {AuthService} from './auth/auth.service';
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, NgIf],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent, NgIf, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
