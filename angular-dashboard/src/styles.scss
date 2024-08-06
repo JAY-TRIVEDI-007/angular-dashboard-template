@@ -1,4 +1,120 @@
+// use existing main scss
+@use '@angular/material' as mat;
+
+$dark-text: #000000;
+$light-text: #ffffff;
+
+$dark-primary-text: #A6ADBB;
+$light-primary-text: #1f2937;
+
+// light theme pallets
+$mat-primary: (
+  main: #4a00ff,
+  lighter: #c9b3ff,
+  darker: #3200ff,
+  200: #4a00ff, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-primary: mat.define-palette($mat-primary, main, lighter, darker);
+
+$mat-accent: (
+  main: #ff1ecc,
+  lighter: #ffbcf0,
+  darker: #ff12b9,
+  200: #ff1ecc, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-accent: mat.define-palette($mat-accent, main, lighter, darker);
+
+$mat-warn: (
+  main: #00d3be,
+  lighter: #b3f2ec,
+  darker: #00c2a7,
+  200: #00d3be, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $dark-primary-text,
+  )
+);
+$theme-warn: mat.define-palette($mat-warn, main, lighter, darker);
+
+$lightTheme: (
+  primary: $theme-primary,
+  accent: $theme-accent,
+  warn: $theme-warn,
+  is-dark: true
+);
+
+// dark theme pallets
+$mat-dark-primary: (
+  main: #7480ff,
+  lighter: #d5d9ff,
+  darker: #5763ff,
+  200: #7480ff, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-dark-primary: mat.define-palette($mat-dark-primary, main, lighter, darker);
+
+$mat-dark-accent: (
+  main: #ff62d4,
+  lighter: #ffd0f2,
+  darker: #ff46c3,
+  200: #ff62d4, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $dark-primary-text,
+  )
+);
+$theme-dark-accent: mat.define-palette($mat-dark-accent, main, lighter, darker);
+
+$mat-dark-warn: (
+  main: #00cab6,
+  lighter: #b3efe9,
+  darker: #00b79e,
+  200: #00cab6, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$theme-dark-warn: mat.define-palette($mat-dark-warn, main, lighter, darker);
+
+$darkTheme: (
+  primary: $theme-dark-primary,
+  accent: $theme-dark-accent,
+  warn: $theme-dark-warn,
+  is-dark: true
+);
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+[data-theme=dark] {
+  @include mat.snack-bar-base($darkTheme);
+}
