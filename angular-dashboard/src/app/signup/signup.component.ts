@@ -1,13 +1,13 @@
 import {Component, inject} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonService} from '../shared/services/common.service';
-import {AuthService} from '../auth/auth.service';
+import {ApiService} from '../auth/api.service';
 import {SignUpFormInterface} from '../shared/interfaces/auth.interface';
 import {NgClass, NgIf} from '@angular/common';
 import {catchError, throwError} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ToasterType} from "../shared/shared-enums";
+import {ToasterType} from '../shared/shared-enums';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +23,9 @@ import {ToasterType} from "../shared/shared-enums";
 })
 export class SignupComponent {
   private commonService: CommonService = inject(CommonService);
-  private authService: AuthService = inject(AuthService);
+  private authService: ApiService = inject(ApiService);
+  private router: Router = inject(Router);
+
   isShowLoader = false;
 
   get firstName(): FormControl {
@@ -66,15 +68,15 @@ export class SignupComponent {
       this.authService.signup(userDetails)
         .pipe(
           catchError((err: HttpErrorResponse) => {
-            this.commonService.showSnackbar(this.commonService.generateAPIErrorMessage(err), ToasterType.ERROR);
             this.isShowLoader = false;
             return throwError(err.error);
           })
         )
         .subscribe(res => {
-        console.log('res', res);
-        this.isShowLoader = false;
-      });
+          this.commonService.showSnackbar('You are registered successfully. Please login', ToasterType.SUCCESS);
+          this.isShowLoader = false;
+          this.router.navigateByUrl('/login');
+        });
     }
   }
 

@@ -6,8 +6,9 @@ import {NgIf} from '@angular/common';
 import {filter} from 'rxjs';
 import {CommonService} from './shared/services/common.service';
 import {routes} from './app.routes';
-import {AuthService} from './auth/auth.service';
-import {HttpClientModule} from "@angular/common/http";
+import {ApiService} from './auth/api.service';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserService} from './shared/services/browser.service';
 
 @Component({
   selector: 'app-root',
@@ -20,32 +21,35 @@ export class AppComponent {
   title = 'angular-dashboard';
   isShowHeaderFooter = false;
 
-  constructor(private _router: Router, private commonService: CommonService, private authService: AuthService) {
+  constructor(private _router: Router, private commonService: CommonService, private authService: ApiService,
+              private browser: BrowserService) {
     this.setAuthorizedViews();
 
     this._router.events.pipe(
-       filter((e) => e instanceof NavigationEnd)
+      filter((e) => e instanceof NavigationEnd)
     ).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let url = event.urlAfterRedirects.toString().replace('/', '');
-        this.isShowHeaderFooter = this.commonService.authorizedViews.includes(url);
+        this.isShowHeaderFooter = this.commonService.hasHeaderViews.includes(url);
       }
     });
   }
 
   private setAuthorizedViews() {
     routes.forEach(route => {
-      if (route.data !== undefined && route.path !== undefined)
-      {
-        if (route.data['isAuthorizedView'] != undefined) {
-          this.commonService.authorizedViews.push(route?.path);
+      if (route.data !== undefined && route.path !== undefined) {
+        if (route.data['hasHeaderView'] != undefined) {
+          this.commonService.hasHeaderViews.push(route?.path);
         }
       }
     });
   }
 
   logoutUser(): void {
-    this.authService.logoutUser();
-    this._router.navigate(['/login']);
+    this.authService.logoutUser()
+      .subscribe(() => {
+        this.browser.clearLocalStorage();
+        this._router.navigate(['/login']);
+      });
   }
 }

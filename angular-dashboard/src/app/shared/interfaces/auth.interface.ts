@@ -1,10 +1,3 @@
-export interface UserInterface {
-  firstName: string;
-  lastName: string;
-  email: string;
-  isAdmin: boolean;
-}
-
 export interface LoginFormInterface {
   email: string;
   password: string;
@@ -18,9 +11,14 @@ export interface SignUpFormInterface {
 }
 
 export interface LoginAPIResponse {
-
+  auth_token: string;
 }
 
-export interface SignUpAPIResponse {
-
+export interface UserInterface {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    is_staff: boolean;
+    is_superuser: boolean;
 }

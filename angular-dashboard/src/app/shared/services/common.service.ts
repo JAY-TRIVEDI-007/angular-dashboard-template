@@ -11,10 +11,10 @@ import {ToasterType} from '../shared-enums';
 })
 export class CommonService {
 
-  authorizedViews: string[] = [];
+  hasHeaderViews: string[] = [];
   headerTitle = signal<string>('App');
-  STATUS_500 = 'Unexpected Server Error';
-  STATUS_0 = 'Server not available';
+  STATUS_500 = 'Unexpected Server Error.';
+  STATUS_0 = 'API Server not available.';
 
   constructor(@Inject(DOCUMENT) private document: Document, private toastrService: ToastrService) {
   }
@@ -65,14 +65,17 @@ export class CommonService {
         return this.STATUS_0;
       case 500:
         return this.STATUS_500;
+      case 501:
+        return this.STATUS_500;
       case 400:
         if (!err.error.success) {
           let msg = '';
-          for (let key in err.error) {
-            if (key != 'success')
+          Object.keys(err?.error).forEach(key => {
+            if (key != 'success') {
               msg = err.error[key];
-            break;
-          }
+              return;
+            }
+          });
           return msg;
         }
         return err.statusText;

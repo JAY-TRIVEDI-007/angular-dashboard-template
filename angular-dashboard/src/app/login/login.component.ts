@@ -1,13 +1,13 @@
 import {Component, inject} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonService} from '../shared/services/common.service';
 import {NgClass, NgIf} from '@angular/common';
-import {LoginFormInterface} from '../shared/interfaces/auth.interface';
-import {AuthService} from '../auth/auth.service';
+import {LoginAPIResponse, LoginFormInterface} from '../shared/interfaces/auth.interface';
+import {ApiService} from '../auth/api.service';
 import {catchError, throwError} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ToasterType} from '../shared/shared-enums';
+import {BrowserService} from '../shared/services/browser.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +23,10 @@ import {ToasterType} from '../shared/shared-enums';
 })
 export class LoginComponent {
   private commonService: CommonService = inject(CommonService);
-  private authService: AuthService = inject(AuthService);
+  private authService: ApiService = inject(ApiService);
+  private browser: BrowserService = inject(BrowserService);
+  private router: Router = inject(Router);
+
   isShowLoader = false;
 
   get email(): FormControl {
@@ -49,14 +52,14 @@ export class LoginComponent {
       this.authService.login(userLogin)
         .pipe(
           catchError((err: HttpErrorResponse) => {
-            this.commonService.showSnackbar(this.commonService.generateAPIErrorMessage(err), ToasterType.ERROR);
             this.isShowLoader = false;
             return throwError(() => err.error);
           })
         )
-        .subscribe(res => {
-          console.log('res', res);
+        .subscribe((res: LoginAPIResponse) => {
+          this.browser.setLocalStorage('tkn', res.auth_token);
           this.isShowLoader = false;
+          this.router.navigate(['']);
         });
     }
   }
