@@ -19,17 +19,18 @@ export class AuthService {
   private apiPath: string = environment.apiPath;
   private apiUrl: string = this.commonService.concatenateURL(this.apiDomain, this.apiPath);
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
+  private authHeader = new HttpHeaders({'Authorization': 'token'});
 
   constructor(private http: HttpClient, private commonService: CommonService, private browserService: BrowserService) { }
 
   login(formData: LoginFormInterface): Observable<LoginAPIResponse> {
-    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/login/', );
+    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/token/login/');
     return this.http.post<LoginAPIResponse>(url, formData, {headers: this.headers});
   }
 
   logoutUser(): any {
     this.browserService.clearLocalStorage();
-    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/logout/');
+    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/token/logout/');
     return this.http.post<any>(url, {});
   }
 

@@ -47,7 +47,9 @@
 
       <div>
         <button type="submit" class="btn btn-primary w-full" (click)="loginUser()"
-                [disabled]="userLoginForm.invalid">Sign in
+                [disabled]="userLoginForm.invalid">
+          <span *ngIf="!isShowLoader">Sign in</span>
+          <span class="loading loading-bars loading-md" *ngIf="isShowLoader"></span>
         </button>
       </div>
     </form>

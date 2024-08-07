@@ -1,10 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {CommonService} from "../shared/services/common.service";
-import {AuthService} from "../auth/auth.service";
-import {SignUpFormInterface} from "../shared/interfaces/auth.interface";
-import {NgClass, NgIf} from "@angular/common";
+import {CommonService} from '../shared/services/common.service';
+import {AuthService} from '../auth/auth.service';
+import {SignUpFormInterface} from '../shared/interfaces/auth.interface';
+import {NgClass, NgIf} from '@angular/common';
+import {catchError, throwError} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ToasterType} from "../shared/shared-enums";
 
 @Component({
   selector: 'app-signup',
@@ -21,6 +24,7 @@ import {NgClass, NgIf} from "@angular/common";
 export class SignupComponent {
   private commonService: CommonService = inject(CommonService);
   private authService: AuthService = inject(AuthService);
+  isShowLoader = false;
 
   get firstName(): FormControl {
     return <FormControl<any>>this.userSignUpForm?.get('firstName');
@@ -53,14 +57,23 @@ export class SignupComponent {
   registerUser(): void {
     if (this.userSignUpForm.valid) {
       let userDetails: SignUpFormInterface = {
-        'first_name': this.userSignUpForm.get('firstName')?.value,
-        'last_name': this.userSignUpForm.get('lastName')?.value,
-        'email': this.userSignUpForm.get('email')?.value,
-        'password': this.userSignUpForm.get('password')?.value
+        'first_name': this.firstName.value,
+        'last_name': this.lastName.value,
+        'email': this.email.value,
+        'password': this.password.value
       }
 
-      this.authService.signup(userDetails).subscribe(res => {
-        console.log(res);
+      this.authService.signup(userDetails)
+        .pipe(
+          catchError((err: HttpErrorResponse) => {
+            this.commonService.showSnackbar(this.commonService.generateAPIErrorMessage(err), ToasterType.ERROR);
+            this.isShowLoader = false;
+            return throwError(err.error);
+          })
+        )
+        .subscribe(res => {
+        console.log('res', res);
+        this.isShowLoader = false;
       });
     }
   }

@@ -5,6 +5,9 @@ import {CommonService} from '../shared/services/common.service';
 import {NgClass, NgIf} from '@angular/common';
 import {LoginFormInterface} from '../shared/interfaces/auth.interface';
 import {AuthService} from '../auth/auth.service';
+import {catchError, throwError} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
+import {ToasterType} from '../shared/shared-enums';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +24,7 @@ import {AuthService} from '../auth/auth.service';
 export class LoginComponent {
   private commonService: CommonService = inject(CommonService);
   private authService: AuthService = inject(AuthService);
+  isShowLoader = false;
 
   get email(): FormControl {
     return <FormControl<any>>this.userLoginForm?.get('email');
@@ -41,9 +45,19 @@ export class LoginComponent {
         'email': this.email.value,
         'password': this.password.value,
       }
-      this.authService.login(userLogin).subscribe(res => {
-        console.log(res);
-      });
+      this.isShowLoader = true;
+      this.authService.login(userLogin)
+        .pipe(
+          catchError((err: HttpErrorResponse) => {
+            this.commonService.showSnackbar(this.commonService.generateAPIErrorMessage(err), ToasterType.ERROR);
+            this.isShowLoader = false;
+            return throwError(() => err.error);
+          })
+        )
+        .subscribe(res => {
+          console.log('res', res);
+          this.isShowLoader = false;
+        });
     }
   }
 

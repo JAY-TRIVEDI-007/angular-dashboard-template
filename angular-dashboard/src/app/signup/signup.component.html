@@ -99,7 +99,9 @@
 
       <div>
         <button type="submit" class="btn btn-primary w-full" (click)="registerUser()"
-                [disabled]="userSignUpForm.invalid">Sign up
+                [disabled]="userSignUpForm.invalid">
+          <span *ngIf="!isShowLoader">Sign up</span>
+          <span class="loading loading-bars loading-md" *ngIf="isShowLoader"></span>
         </button>
       </div>
     </form>

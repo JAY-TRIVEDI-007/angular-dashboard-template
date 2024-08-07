@@ -1,4 +1,4 @@
 export const environment = {
-  apiDomain: '',
-  apiPath: ''
+  apiDomain: 'http://localhost:8000/',
+  apiPath: '/api/'
 };
