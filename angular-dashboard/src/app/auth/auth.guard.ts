@@ -5,14 +5,13 @@ import {inject} from '@angular/core';
 export const authGuard: CanActivateFn = (route, state) => {
   const browser = inject(BrowserService);
   const router = inject(Router);
-  const token = browser.getLocalStorage('tkn');
+  const token = browser.getLocalStorageItem('tkn');
   const routeData = route.data;
 
   if (token) {
-    let users = browser.getLocalStorage('user');
-    if (routeData['isOnlyAdmin'] == true && users != null) {
-      let userDetail = JSON.parse(users);
-      return userDetail['is_superuser'];
+    let userDetails = browser.getUserDetails();
+    if (routeData['isOnlyAdmin'] == true && userDetails != null) {
+      return userDetails['is_superuser'];
     }
     return true;
   }

@@ -10,7 +10,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const browser = inject(BrowserService);
   const commonService = inject(CommonService);
   const router = inject(Router);
-  const token = browser.getLocalStorage('tkn');
+  const token = browser.getLocalStorageItem('tkn');
 
   if (token) {
     let modifiedReq = req.clone({
@@ -28,7 +28,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         }
       })
     );
-  } else {
+  }
+  else {
     return next(req).pipe(
       catchError(err => {
         commonService.showSnackbar(commonService.generateAPIErrorMessage(err), ToasterType.ERROR);

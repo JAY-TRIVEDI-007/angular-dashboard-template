@@ -57,7 +57,7 @@ export class LoginComponent {
           })
         )
         .subscribe((res: LoginAPIResponse) => {
-          this.browser.setLocalStorage('tkn', res.auth_token);
+          this.browser.setLocalStorageItem('tkn', res.auth_token);
           this.isShowLoader = false;
           this.router.navigate(['']);
         });

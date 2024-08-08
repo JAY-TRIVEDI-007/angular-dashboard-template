@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
     this.apiService.getUserDetails()
       .subscribe((res: UserInterface) => {
-          this.browser.setLocalStorage('user', JSON.stringify(res));
+          this.browser.setLocalStorageItem('user', JSON.stringify(res));
       });
   }
 }
