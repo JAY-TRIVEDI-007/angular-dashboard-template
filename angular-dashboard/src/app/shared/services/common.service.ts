@@ -4,6 +4,8 @@ import {DOCUMENT} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {ToasterType} from '../shared-enums';
+import {routes} from '../../app.routes';
+import {Data} from '@angular/router';
 
 
 @Injectable({
@@ -120,5 +122,15 @@ export class CommonService {
         this.toastrService.success(msg, title, option);
         break;
     }
+  }
+
+  getRouteData(link: string): Data | undefined {
+    link = link.replace('/', '');
+
+    let route = routes.find(r => r.path == link);
+    if (route)
+      return route.data;
+
+    return {};
   }
 }
