@@ -26,48 +26,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-{
-    "headers": {
-        "normalizedNames": {},
-        "lazyUpdate": null
-    },
-    "status": 400,
-    "statusText": "Bad Request",
-    "url": "http://localhost:8000/api/auth/users/",
-    "ok": false,
-    "name": "HttpErrorResponse",
-    "message": "Http failure response for http://localhost:8000/api/auth/users/: 400 Bad Request",
-    "error": {
-        "password": "This password is too common.",
-        "success": false
-    }
-}
+### References
 
-{
-    "first_name": "Jay",
-    "last_name": "Trivedi",
-    "email": "admin@jaytrivedi.dev",
-    "id": 1
-}
-
-
-{
-    "headers": {
-        "normalizedNames": {},
-        "lazyUpdate": null
-    },
-    "status": 400,
-    "statusText": "Bad Request",
-    "url": "http://localhost:8000/api/auth/token/login/",
-    "ok": false,
-    "name": "HttpErrorResponse",
-    "message": "Http failure response for http://localhost:8000/api/auth/token/login/: 400 Bad Request",
-    "error": {
-        "non_field_errors": "Unable to log in with provided credentials.",
-        "success": false
-    }
-}
-
-{
-    "auth_token": "645bfc51439a9296edf42bd36a1b3197b6223019"
-}
+- [Angular 17: HTTP Interceptors guide | by Mohsin Ansari | Medium](https://medium.com/@mohsinogen/angular-17-http-interceptors-guide-417e7c8ffada)
+- [Implementing Interceptors in Angular: A Step-by-Step Guide with Examples | by Nitinabansode | Medium](https://medium.com/@nitinabansode/implementing-interceptors-in-angular-a-step-by-step-guide-with-examples-77e629773d99)
+- [Declarative Loop Control Flow in Angular 17 - DEV Community](https://dev.to/this-is-angular/declarative-loop-control-flow-in-angular-17-97d)
+- [Bootstrap Icons · Official open source SVG icon library for Bootstrap](https://icons.getbootstrap.com/)
+- [SVG as templates • Angular](https://angular.dev/guide/templates/svg-in-templates)
