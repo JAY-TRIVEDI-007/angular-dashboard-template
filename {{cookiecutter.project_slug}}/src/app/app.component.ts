@@ -18,7 +18,7 @@ import {BrowserService} from './shared/services/browser.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-dashboard';
+  title = '{{cookiecutter.project_slug}}';
   isShowHeaderFooter = false;
 
   constructor(private _router: Router, private commonService: CommonService, private authService: ApiService,

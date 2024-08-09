@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-dashboard": {
+    "{{cookiecutter.project_slug}}": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-dashboard",
+            "outputPath": "dist/{{cookiecutter.project_slug}}",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -28,8 +28,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              {% if cookiecutter.add_robots_txt == "y" %}"src/robots.txt",{% endif %}
-              {% if cookiecutter.add_sitemap == "y" %}"src/sitemap.xml"{% endif %}
+              "src/robots.txt",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styles.scss"
@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-dashboard:build:production"
+              "buildTarget": "{{cookiecutter.project_slug}}:build:production"
             },
             "development": {
-              "buildTarget": "angular-dashboard:build:development"
+              "buildTarget": "{{cookiecutter.project_slug}}:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-dashboard:build"
+            "buildTarget": "{{cookiecutter.project_slug}}:build"
           }
         },
         "test": {

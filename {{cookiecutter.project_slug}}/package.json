@@ -1,6 +1,12 @@
 {
-  "name": "angular-dashboard",
-  "version": "0.0.0",
+  "name": "{{cookiecutter.project_slug}}",
+  "version": "{{cookiecutter.version}}",
+  "license": "{{cookiecutter.open_source_license}}",
+  "author": "{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>",
+  "engines": {
+    "node": ">=18.20."
+  },
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +14,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^17.3.0",
     "@angular/cdk": "^17.3.10",

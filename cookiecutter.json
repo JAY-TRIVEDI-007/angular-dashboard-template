@@ -3,7 +3,7 @@
   "project_slug": "{{ cookiecutter.project_name.lower()|replace(' ', '_')|replace('-', '_')|replace('.', '_')|trim() }}",
   "description": "Dashboard web application in Angular.",
   "author_name": "Jay Trivedi",
-  "email": "hello@jaytrivedi.dev",
+  "author_email": "hello@jaytrivedi.dev",
   "version": "0.1.0",
   "open_source_license": [
     "MIT",
@@ -12,8 +12,7 @@
     "Apache Software License 2.0",
     "Not open source"
   ],
-  "domain_name": "example.com",
-  "site_name": "www.example.com",
+  "domain_name": "www.example.com",
   "api_domain": "http://localhost:5000",
   "api_base_url": "/api/",
   "add_robots_txt": "n",

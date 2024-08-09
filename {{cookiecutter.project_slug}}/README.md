@@ -1,6 +1,10 @@
-# Angular Dashboard project template
+# {{cookiecutter.project_name}}
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+This project was generated with [JAY-TRIVEDI-007/angular-dashboard-template](https://github.com/JAY-TRIVEDI-007/angular-dashboard-template) Angular version 17.3.8.
+
+## Description
+
+{{cookiecutter.description}}
 
 ## Development server
 
