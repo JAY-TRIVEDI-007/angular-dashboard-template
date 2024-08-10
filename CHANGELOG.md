@@ -21,6 +21,15 @@ Additional labels for pre-release and build metadata are available as extensions
 
 ### Added
 
+### Changed
+
+### Fixed
+
+
+## [1.0.0] - 2024-08-10
+
+### Added
+
 - Angular 17
 - Tailwindcss
 - DaisyUi - Tailwindcss plugin
@@ -32,15 +41,6 @@ Additional labels for pre-release and build metadata are available as extensions
 - Common service for utility functions.
 - User Authentication.
 - Access level based sidebar menu.
-
-### Changed
-
-### Fixed
-
-
-## [1.0.0] - YYYY-MM-DD
-
-### Added
 
 ### Changed
 
