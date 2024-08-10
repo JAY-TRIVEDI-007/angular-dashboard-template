@@ -26,7 +26,7 @@ Additional labels for pre-release and build metadata are available as extensions
 ### Fixed
 
 
-## [1.0.0] - 2024-08-10
+## [{{ cookiecutter.version }}] - {% now 'local', '%Y-%m-%d' %}
 
 ### Added
 

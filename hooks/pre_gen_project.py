@@ -2,9 +2,10 @@
 # It updates the cookiecutter context to trim leading and trailing spaces
 # from domain/email values
 """
-{{ cookiecutter.update({ "email": cookiecutter.email | trim }) }}
-{{ cookiecutter.update({ "api_domain": cookiecutter.domain_name | trim }) }}
-{{ cookiecutter.update({ "api_base_url": cookiecutter.site_name | trim }) }}
+{{ cookiecutter.update({ "email": cookiecutter.author_email | trim }) }}
+{{ cookiecutter.update({ "domain_name": cookiecutter.domain_name | trim }) }}
+{{ cookiecutter.update({ "api_domain": cookiecutter.api_domain | trim }) }}
+{{ cookiecutter.update({ "api_base_url": cookiecutter.api_base_url | trim }) }}
 """
 
 

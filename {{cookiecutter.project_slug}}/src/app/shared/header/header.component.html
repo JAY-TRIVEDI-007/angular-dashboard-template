@@ -1,0 +1,95 @@
+<div class="drawer lg:drawer-open">
+  <input id="sidebar-toggle" type="checkbox" class="drawer-toggle"/>
+  <div class="drawer-content flex flex-col">
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 w-full shadow-lg justify-between">
+      <div class="flex-none lg:hidden">
+        <label for="sidebar-toggle" aria-label="open sidebar" class="btn btn-square btn-ghost">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block h-6 w-6 stroke-current">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </label>
+      </div>
+      <div class="mx-2 flex-1 px-2 text-xl font-bold">{{ headerTitle() }}</div>
+      <div class="flex gap-2 align-middle">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost avatar p-0 btn-circle" (click)="toggleUserMenu()">
+            <div class="w-10 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                   stroke="currentColor" class="size-10">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+              </svg>
+            </div>
+          </div>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow" [ngStyle]="{'visibility': !isShowUserMenu() ? 'hidden' : 'visible'}">
+            <li>
+              <a class="justify-between" [routerLink]="'/profile'" (click)="toggleUserMenu()">
+                Profile
+              </a>
+            </li>
+            <li><a (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Page content here -->
+    <ng-content></ng-content>
+  </div>
+
+  <div class="drawer-side">
+    <label for="sidebar-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
+    <div class="min-h-full bg-blue-900" [ngClass]="isDrawerCollapsed() ? 'w-20' : 'w-72'">
+      <div class="p-3 flex justify-between align-middle">
+        <img src="assets/img/jaytrivedi-logo-white.png" alt="logo" class="w-3/5" *ngIf="!isDrawerCollapsed()">
+
+        <button class="hidden lg:block btn btn-ghost cursor-pointer delay-75 transition-all" (click)="toggleDrawerCollapse()" [ngClass]="{'rotate-180': isDrawerCollapsed()}">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="size-6 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"/>
+          </svg>
+        </button>
+
+        <label for="sidebar-toggle" class="lg:hidden btn btn-circle btn-ghost cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="size-6 text-white">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
+        </label>
+      </div>
+      <ul class="menu mt-6 text-lg text-white font-light [&>li]:mb-1.5" [ngClass]="isDrawerCollapsed() ? 'p-2' : 'p-4'">
+        @for (menu of sideMenuItems(); track menu.link) {
+          <li>
+            <a [routerLink]="menu.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: menu.link == ''}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                   stroke="currentColor" [ngClass]="isDrawerCollapsed() ? 'size-8' : 'size-6'" *ngIf="menu.svgPath">
+                <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="menu.svgPath"/>
+              </svg>
+              <span *ngIf="!isDrawerCollapsed()">{{menu.name}}</span>
+            </a>
+          </li>
+        }
+        <li>
+          <a>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" [ngClass]="isDrawerCollapsed() ? 'size-8' : 'size-6'">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"/>
+            </svg>
+            <span *ngIf="!isDrawerCollapsed()" (click)="logout()">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

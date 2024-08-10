@@ -1,0 +1,12 @@
+version: '3.0'
+
+services:
+  {{ cookiecutter.project_slug }}:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: {{ cookiecutter.project_slug }}:{{ cookiecutter.version }}
+    ports:
+    - "80:80"
+
+# docker build -t {{ cookiecutter.project_slug }}:{{ cookiecutter.version }} --platform=linux/amd64 .

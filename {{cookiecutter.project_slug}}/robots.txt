@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Sitemap
+Sitemap: https://{{cookiecutter.domain_name}}/sitemap.xml
