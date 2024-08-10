@@ -26,9 +26,21 @@ Additional labels for pre-release and build metadata are available as extensions
 ### Fixed
 
 
-## [1.0.0] - YYYY-MM-DD
+## [{{ cookiecutter.version }}] - {% now 'local', '%Y-%m-%d' %}
 
 ### Added
+
+- Angular 17
+- Tailwindcss
+- DaisyUi - Tailwindcss plugin
+- Pre-build Login page.
+- Pre-build Sign up page.
+- Pre-build Dashboard.
+- Pre-build 404 page.
+- Auth guard.
+- Common service for utility functions.
+- User Authentication.
+- Access level based sidebar menu.
 
 ### Changed
 

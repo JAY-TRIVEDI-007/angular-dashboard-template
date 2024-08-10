@@ -4,6 +4,8 @@ import {NgClass, NgIf, NgStyle} from '@angular/common';
 import {CommonService} from '../services/common.service';
 import {SideMenuItem} from '../interfaces/page.interface';
 import {BrowserService} from '../services/browser.service';
+import { UserInterface } from '../interfaces/auth.interface';
+import { ApiService } from '../../auth/api.service';
 
 @Component({
   selector: 'app-header',
@@ -24,6 +26,8 @@ export class HeaderComponent implements OnInit {
 
   private commonService: CommonService = inject(CommonService);
   private browser: BrowserService = inject(BrowserService);
+  private apiService: ApiService = inject(ApiService);
+
   isDrawerCollapsed = signal(false);
   isShowUserMenu = signal(false);
   headerTitle = computed(() => this.commonService.headerTitle());
@@ -49,7 +53,11 @@ export class HeaderComponent implements OnInit {
   sideMenuItems = signal<SideMenuItem[]>([]);
 
   ngOnInit() {
-    this.sideMenuItems.set(this.getUserSpecificSideMenuItems());
+    this.apiService.getUserDetails()
+    .subscribe((res: UserInterface) => {
+      this.browser.setLocalStorageItem('user', JSON.stringify(res));
+      this.sideMenuItems.set(this.getUserSpecificSideMenuItems());
+    });
   }
 
   toggleDrawerCollapse(): void {

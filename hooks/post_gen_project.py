@@ -53,6 +53,14 @@ def main():
     if "{{ cookiecutter.add_docker }}" == "y" and "{{ cookiecutter.add_docker_compose }}" == "n":
         remove_file("docker-compose.yaml")
 
+    # Add Project name in index file
+    project_name = "{{ cookiecutter.project_name }}"
+    with open(os.path.join(os.getcwd(), "src/index.html"), "r+") as f:
+        file_contents = f.read().replace("[[project_name]]", project_name)
+        f.seek(0)
+        f.write(file_contents)
+        f.truncate()
+
     if "{{ cookiecutter.is_install_npm }}" == "y":
         install_npm()
 

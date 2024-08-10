@@ -4,7 +4,8 @@
   "license": "{{cookiecutter.open_source_license}}",
   "author": "{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>",
   "engines": {
-    "node": ">=18.20."
+    "node": "v20.14.0",
+    "npm": "10.7.0"
   },
   "private": true,
   "scripts": {

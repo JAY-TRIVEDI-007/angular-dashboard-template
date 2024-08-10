@@ -26,7 +26,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 # Copy static assets from builder stage
-COPY --from=builder /app/dist/{{ cookiecutter.project_slug }} .
+COPY --from=builder /app/dist/{{ cookiecutter.project_slug }}/browser .
 # Copy default.conf to nginx
 COPY default.conf /etc/nginx/conf.d
 

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonService} from '../shared/services/common.service';
 import {ApiService} from '../auth/api.service';
-import {UserInterface} from '../shared/interfaces/auth.interface';
 import {BrowserService} from '../shared/services/browser.service';
 
 @Component({
@@ -18,10 +17,5 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.commonService.headerTitle.set('Dashboard');
-
-    this.apiService.getUserDetails()
-      .subscribe((res: UserInterface) => {
-          this.browser.setLocalStorageItem('user', JSON.stringify(res));
-      });
   }
 }

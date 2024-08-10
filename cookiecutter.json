@@ -22,5 +22,7 @@
   "first_commit": "y",
   "add_docker": "y",
   "add_docker_compose": "y",
-  "_copy_without_render": []
+  "_copy_without_render": [
+    "*.html"
+  ]
 }
