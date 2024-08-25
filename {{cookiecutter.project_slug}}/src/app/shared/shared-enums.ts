@@ -4,3 +4,16 @@ export enum ToasterType {
   SUCCESS = 'success',
   WARNING = 'warning'
 }
+
+export enum FormFieldType {
+  TEXT = 'text',
+  EMAIL = 'email',
+  PASSWORD = 'password',
+  CHECKBOX = 'checkbox',
+  PHONE = 'phone'
+}
+
+export enum GridActionType {
+  EDIT = 'Edit',
+  CREATE = 'Add'
+}

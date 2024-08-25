@@ -3,7 +3,7 @@ import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {FooterComponent} from './shared/footer/footer.component';
 import {HeaderComponent} from './shared/header/header.component';
 import {NgIf} from '@angular/common';
-import {filter} from 'rxjs';
+import {catchError, filter, throwError} from 'rxjs';
 import {CommonService} from './shared/services/common.service';
 import {routes} from './app.routes';
 import {ApiService} from './auth/api.service';
@@ -47,6 +47,13 @@ export class AppComponent {
 
   logoutUser(): void {
     this.authService.logoutUser()
+      .pipe(
+        catchError(err => {
+          this.browser.clearLocalStorage();
+          this._router.navigate(['/login']);
+          return throwError(err.error);
+        })
+      )
       .subscribe(() => {
         this.browser.clearLocalStorage();
         this._router.navigate(['/login']);

@@ -14,7 +14,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (token) {
     let modifiedReq = req.clone({
-      headers: new HttpHeaders({'Authorization': `Token ${token}`})
+      headers: new HttpHeaders({'Authorization': `Token ${token}`, 'Content-Type': 'application/json'})
     });
 
     return next(modifiedReq).pipe(
@@ -24,6 +24,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           router.navigate(['login']);
           return throwError(() => res.error);
         } else {
+          commonService.showSnackbar(commonService.generateAPIErrorMessage(res), ToasterType.ERROR);
           return throwError(() => res.error);
         }
       })

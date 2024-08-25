@@ -13,8 +13,8 @@
         </div>
         <input id="first_name" name="first_name" type="text" required class="input input-bordered w-full"
                [formControl]="firstName"
-               [ngClass]="{'input-error': (firstName.touched || firstName.dirty) && !firstName.valid}">
-        <div class="label" *ngIf="(firstName.touched ||firstName.dirty) && !firstName.valid">
+               [ngClass]="{'input-error': isFormControlHasError(firstName)}">
+        <div class="label" *ngIf="isFormControlHasError(firstName)">
           <span class="label-text-alt text-red-500">{{ getErrorMessage('firstName', 'First name') }}</span>
         </div>
       </div>
@@ -25,9 +25,21 @@
         </div>
         <input id="last_name" name="last_name" type="text" required class="input input-bordered w-full"
                [formControl]="lastName"
-               [ngClass]="{'input-error': (lastName.touched || lastName.dirty) && !lastName.valid}">
-        <div class="label" *ngIf="(lastName.touched || lastName.dirty) && !lastName.valid">
+               [ngClass]="{'input-error': isFormControlHasError(lastName)}">
+        <div class="label" *ngIf="isFormControlHasError(lastName)">
           <span class="label-text-alt text-red-500">{{ getErrorMessage('lastName', 'Last name') }}</span>
+        </div>
+      </div>
+
+      <div class="form-control w-full">
+        <div class="label">
+          <label for="username" class="label-text font-medium">Username</label>
+        </div>
+        <input id="username" name="username" type="text" required class="input input-bordered w-full"
+               [formControl]="username"
+               [ngClass]="{'input-error': isFormControlHasError(username)}">
+        <div class="label" *ngIf="isFormControlHasError(username)">
+          <span class="label-text-alt text-red-500">{{ getErrorMessage('username', 'Username') }}</span>
         </div>
       </div>
 
@@ -36,8 +48,8 @@
           <label for="email" class="label-text font-medium">Email address</label>
         </div>
         <input id="email" name="email" type="email" autocomplete="email" required class="input input-bordered w-full"
-               [formControl]="email" [ngClass]="{'input-error': (email.touched || email.dirty) && !email.valid}">
-        <div class="label" *ngIf="(email.touched || email.dirty) && !email.valid">
+               [formControl]="email" [ngClass]="{'input-error': isFormControlHasError(email)}">
+        <div class="label" *ngIf="isFormControlHasError(email)">
           <span class="label-text-alt text-red-500">{{ getErrorMessage('email', 'Email') }}</span>
         </div>
       </div>
@@ -49,7 +61,7 @@
         <div class="input input-bordered flex items-center gap-2">
           <input id="password" name="password" type="password" required class="w-full"
                  [formControl]="password"
-                 [ngClass]="{'input-error': (password.touched || password.dirty) && !password.valid}">
+                 [ngClass]="{'input-error': isFormControlHasError(password)}">
           <button (click)="togglePasswordVisibility('password')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="size-6" *ngIf="!isPasswordFieldVisible('password')">
@@ -64,7 +76,7 @@
             </svg>
           </button>
         </div>
-        <div class="label" *ngIf="(password.touched || password.dirty) && !password.valid">
+        <div class="label" *ngIf="isFormControlHasError(password)">
           <span class="label-text-alt text-red-500">{{ getErrorMessage('password', 'Password') }}</span>
         </div>
       </div>
@@ -76,7 +88,7 @@
         <div class="input input-bordered flex items-center gap-2">
           <input id="password_confirm" name="password_confirm" type="password" required
                  class="w-full" [formControl]="confirmPassword"
-                 [ngClass]="{'input-error': (confirmPassword.touched || confirmPassword.dirty) && !confirmPassword.valid}">
+                 [ngClass]="{'input-error': isFormControlHasError(confirmPassword)}">
 
           <button (click)="togglePasswordVisibility('password_confirm')">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -92,7 +104,7 @@
             </svg>
           </button>
         </div>
-        <div class="label" *ngIf="(confirmPassword.touched || confirmPassword.dirty) && !confirmPassword.valid">
+        <div class="label" *ngIf="isFormControlHasError(confirmPassword)">
           <span class="label-text-alt text-red-500">{{ getErrorMessage('confirmPassword', 'Confirm Password') }}</span>
         </div>
       </div>

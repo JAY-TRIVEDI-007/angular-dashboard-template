@@ -1,0 +1,12 @@
+<h2 mat-dialog-title class="text-2xl">Confirmation</h2>
+
+<mat-dialog-content>
+  <div class="text-gray-500">{{ data.title }}</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="flex flex-row justify-end gap-3 mt-3">
+    <button class="btn btn-primary ml-2" (click)="onConfirm()">Confirm</button>
+    <button class="btn text-slate-500 " (click)="onCancel()">Cancel</button>
+  </div>
+</mat-dialog-actions>

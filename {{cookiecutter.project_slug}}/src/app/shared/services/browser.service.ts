@@ -41,4 +41,17 @@ export class BrowserService {
     }
     return null;
   }
+
+  getUserName(): string {
+    let userDetails = this.getUserDetails();
+    if (userDetails?.username) {
+      return userDetails.username;
+    }
+    else if (userDetails?.first_name) {
+      return userDetails.first_name + (userDetails.last_name ? ' ' + userDetails.last_name : '');
+    }
+    else {
+      return 'unknown';
+    }
+  }
 }

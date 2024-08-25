@@ -6,6 +6,7 @@ import {ToastrService} from 'ngx-toastr';
 import {ToasterType} from '../shared-enums';
 import {routes} from '../../app.routes';
 import {Data} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 
 @Injectable({
@@ -18,7 +19,12 @@ export class CommonService {
   STATUS_500 = 'Unexpected Server Error.';
   STATUS_0 = 'API Server not available.';
 
-  constructor(@Inject(DOCUMENT) private document: Document, private toastrService: ToastrService) {
+  constructor(@Inject(DOCUMENT) private document: Document, private toastrService: ToastrService, private _titleService: Title) {
+  }
+
+  updatePageTitle(title: string) {
+    this.headerTitle.set(title);
+    this._titleService.setTitle(title);
   }
 
   getErrorMessage(formGroup: FormGroup, formControlName: string, label: string): string {
@@ -29,6 +35,8 @@ export class CommonService {
         return 'Email is invalid.';
       } else if (errors['required']) {
         return `${label} is required.`;
+      } else if (errors['confirmPassword']) {
+        return `Password did not match`;
       }
     }
     return '';

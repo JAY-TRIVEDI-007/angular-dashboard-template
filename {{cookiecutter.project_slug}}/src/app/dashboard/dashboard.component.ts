@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonService} from '../shared/services/common.service';
+import {Component, OnInit, signal} from '@angular/core';
 import {ApiService} from '../auth/api.service';
 import {BrowserService} from '../shared/services/browser.service';
 
@@ -12,10 +11,12 @@ import {BrowserService} from '../shared/services/browser.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private commonService: CommonService, private apiService: ApiService, private browser: BrowserService) {
+  username = signal<string>('');
+
+  constructor(private apiService: ApiService, private browser: BrowserService) {
   }
 
   ngOnInit() {
-    this.commonService.headerTitle.set('Dashboard');
+    this.username.set(this.browser.getUserName());
   }
 }

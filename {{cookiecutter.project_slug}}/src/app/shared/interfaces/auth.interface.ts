@@ -6,6 +6,7 @@ export interface LoginFormInterface {
 export interface SignUpFormInterface {
   first_name: string;
   last_name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -15,10 +16,19 @@ export interface LoginAPIResponse {
 }
 
 export interface UserInterface {
-    id: number;
-    first_name: string;
-    last_name: string;
-    email: string;
-    is_staff: boolean;
-    is_superuser: boolean;
+  id: number;
+  email: string;
+  username: string;
+  first_name: string;
+  last_name: string;
+  is_staff: boolean;
+  is_superuser: boolean;
+  is_bot: boolean;
+}
+
+export interface UserProfile {
+  email?: string;
+  username?: string;
+  first_name?: string;
+  last_name?: string;
 }

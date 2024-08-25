@@ -32,7 +32,8 @@
           </div>
           <ul
             tabindex="0"
-            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow" [ngStyle]="{'visibility': !isShowUserMenu() ? 'hidden' : 'visible'}">
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            [ngStyle]="{'visibility': !isShowUserMenu() ? 'hidden' : 'visible'}">
             <li>
               <a class="justify-between" [routerLink]="'/profile'" (click)="toggleUserMenu()">
                 Profile
@@ -53,7 +54,8 @@
       <div class="p-3 flex justify-between align-middle">
         <img src="assets/img/jaytrivedi-logo-white.png" alt="logo" class="w-3/5" *ngIf="!isDrawerCollapsed()">
 
-        <button class="hidden lg:block btn btn-ghost cursor-pointer delay-75 transition-all" (click)="toggleDrawerCollapse()" [ngClass]="{'rotate-180': isDrawerCollapsed()}">
+        <button class="hidden lg:block btn btn-ghost cursor-pointer delay-75 transition-all"
+                (click)="toggleDrawerCollapse()" [ngClass]="{'rotate-180': isDrawerCollapsed()}">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                stroke="currentColor" class="size-6 text-white">
             <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"/>
@@ -71,21 +73,18 @@
         @for (menu of sideMenuItems(); track menu.link) {
           <li>
             <a [routerLink]="menu.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: menu.link == ''}">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                   stroke="currentColor" [ngClass]="isDrawerCollapsed() ? 'size-8' : 'size-6'" *ngIf="menu.svgPath">
-                <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="menu.svgPath"/>
-              </svg>
-              <span *ngIf="!isDrawerCollapsed()">{{menu.name}}</span>
+              <img [ngSrc]="menu.svgPath" class="text-white"
+                   [ngClass]="isDrawerCollapsed() ? 'size-7' : 'size-6'" alt="logout"
+                   height="16" width="16">
+              <span *ngIf="!isDrawerCollapsed()">{{ menu.name }}</span>
             </a>
           </li>
         }
         <li>
           <a>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" [ngClass]="isDrawerCollapsed() ? 'size-8' : 'size-6'">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"/>
-            </svg>
+            <img ngSrc="assets/icons/arrow-left-start-on-rectangle.svg" class="text-white"
+                 [ngClass]="isDrawerCollapsed() ? 'size-7' : 'size-6'" alt="logout"
+                 height="16" width="16">
             <span *ngIf="!isDrawerCollapsed()" (click)="logout()">Logout</span>
           </a>
         </li>
