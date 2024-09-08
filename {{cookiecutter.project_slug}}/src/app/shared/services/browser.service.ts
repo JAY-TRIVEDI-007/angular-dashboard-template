@@ -1,13 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
 import {LOCALSTORAGE} from '../global-objects.injector';
-import {UserInterface} from "../interfaces/auth.interface";
+import {CurrentUserInterface} from '../interfaces/auth.interface';
+import {DOCUMENT} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrowserService {
 
-  constructor(@Inject(LOCALSTORAGE) private _localStorage: Storage) {
+  constructor(@Inject(LOCALSTORAGE) private _localStorage: Storage, @Inject(DOCUMENT) private _document: Document) {
   }
 
   setLocalStorageItem(key: string, value: string): void {
@@ -34,7 +35,7 @@ export class BrowserService {
     this._localStorage.clear();
   }
 
-  getUserDetails(): UserInterface | null {
+  getUserDetails(): CurrentUserInterface | null {
     let user = this.getLocalStorageItem('user');
     if (user) {
       return JSON.parse(user);

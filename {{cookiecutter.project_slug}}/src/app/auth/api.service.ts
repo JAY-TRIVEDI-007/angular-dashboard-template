@@ -6,8 +6,8 @@ import {Observable} from 'rxjs';
 import {
   LoginAPIResponse,
   LoginFormInterface,
-  UserInterface,
-  SignUpFormInterface, UserProfile
+  CurrentUserInterface,
+  SignUpFormInterface, UserProfile, UserInterface, CreateUserInterface, SetPassword
 } from '../shared/interfaces/auth.interface';
 
 @Injectable({
@@ -31,25 +31,42 @@ export class ApiService {
     return this.http.post<any>(url, {});
   }
 
-  signup(formData: SignUpFormInterface): Observable<UserInterface> {
+  signup(formData: SignUpFormInterface): Observable<CurrentUserInterface> {
     let url = this.commonService.concatenateURL(this.apiUrl, 'auth/users/');
-    return this.http.post<UserInterface>(url, formData);
+    return this.http.post<CurrentUserInterface>(url, formData);
   }
 
-  getUserDetails(): Observable<UserInterface> {
+  getUserDetails(): Observable<CurrentUserInterface> {
     let url = this.commonService.concatenateURL(this.apiUrl, 'auth/users/me');
-    return this.http.get<UserInterface>(url);
+    return this.http.get<CurrentUserInterface>(url);
   }
+
+  updateUserProfile(userProfile: UserProfile): Observable<CurrentUserInterface> {
+    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/users/me/');
+    return this.http.patch<CurrentUserInterface>(url, userProfile);
+  }
+
   getUsersList(): Observable<UserInterface[]> {
     let url = this.commonService.concatenateURL(this.apiUrl, 'auth/users/');
     return this.http.get<UserInterface[]>(url);
   }
-  updateUserProfile(userProfile: UserProfile): Observable<UserInterface> {
-    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/users/me/');
-    return this.http.patch<UserInterface>(url, userProfile);
+  createUser(userDetails: CreateUserInterface): Observable<UserInterface> {
+    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/users/');
+    return this.http.post<UserInterface>(url, userDetails);
   }
-  deleteUser(id: number): Observable<any> {
+  editUser(id: number, data: UserInterface): Observable<UserInterface> {
     let url = this.commonService.concatenateURL(this.apiUrl, `auth/users/${id}/`);
-    return this.http.delete<any>(url);
+    return this.http.put<UserInterface>(url, data);
+  }
+  deleteUser(password: string, id: number): Observable<any> {
+    let url = this.commonService.concatenateURL(this.apiUrl, `auth/users/${id}/`);
+    let data = {
+      'current_password': password
+    };
+    return this.http.delete<any>(url, {body: data});
+  }
+  setUserPassword(data: SetPassword): Observable<any> {
+    let url = this.commonService.concatenateURL(this.apiUrl, 'auth/users/set_password/');
+    return this.http.post<any>(url, data);
   }
 }

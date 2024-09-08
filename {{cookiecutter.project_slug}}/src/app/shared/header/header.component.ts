@@ -4,7 +4,7 @@ import {NgClass, NgIf, NgOptimizedImage, NgStyle} from '@angular/common';
 import {CommonService} from '../services/common.service';
 import {SideMenuItem} from '../interfaces/page.interface';
 import {BrowserService} from '../services/browser.service';
-import { UserInterface } from '../interfaces/auth.interface';
+import { CurrentUserInterface } from '../interfaces/auth.interface';
 import { ApiService } from '../../auth/api.service';
 
 @Component({
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.getUserDetails()
-    .subscribe((res: UserInterface) => {
+    .subscribe((res: CurrentUserInterface) => {
       this.browser.setLocalStorageItem('user', JSON.stringify(res));
       this.sideMenuItems.set(this.getUserSpecificSideMenuItems());
     });
@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit {
       this.sideNav.forEach((item: SideMenuItem) => {
         let pathData = this.commonService.getRouteData(item.link);
         if (pathData && pathData['isOnlyAdmin'] == true) {
-          if (userDetails.is_superuser)
+          if (userDetails.is_staff)
             menuItems.push(item);
         }
         else {

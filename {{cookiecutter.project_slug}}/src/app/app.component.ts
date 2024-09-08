@@ -30,6 +30,9 @@ export class AppComponent {
     ).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let url = event.urlAfterRedirects.toString().replace('/', '');
+        // to remove any query params
+        if (url.indexOf('?') != -1)
+          url = url.substring(0, url.indexOf('?'));
         this.isShowHeaderFooter = this.commonService.hasHeaderViews.includes(url);
       }
     });

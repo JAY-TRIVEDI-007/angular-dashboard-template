@@ -37,3 +37,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - [Declarative Loop Control Flow in Angular 17 - DEV Community](https://dev.to/this-is-angular/declarative-loop-control-flow-in-angular-17-97d)
 - [Bootstrap Icons · Official open source SVG icon library for Bootstrap](https://icons.getbootstrap.com/)
 - [SVG as templates • Angular](https://angular.dev/guide/templates/svg-in-templates)
+- [Tailwind CSS Icons - Heroicons](https://heroicons.com/)

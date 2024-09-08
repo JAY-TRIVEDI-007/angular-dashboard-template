@@ -17,7 +17,7 @@ export const routes: Routes = [
     path: 'profile',
     canActivate: [authGuard],
     loadComponent: () => import('./user/profile/profile.component').then(c => c.ProfileComponent),
-    data: {title: 'Welcome User!', hasHeaderView: true}
+    data: {title: 'Your Profile', hasHeaderView: true}
   },
   {
     path: 'users',
@@ -30,7 +30,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./dashboard/dashboard.component').then(c => c.DashboardComponent),
     pathMatch: 'full',
-    data: {title: 'Welcome to dashboard!', hasHeaderView: true}
+    data: {title: 'Home', hasHeaderView: true}
   },
   {
     path: '**',

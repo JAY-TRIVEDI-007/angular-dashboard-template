@@ -8,6 +8,8 @@ export interface SideMenuItem {
 
 export interface ConfirmDialogData {
   title: string;
+  var1?: string;
+  bool1?: boolean;
 }
 
 export interface DialogFormField {
@@ -16,6 +18,7 @@ export interface DialogFormField {
   label: string;
   required?: boolean;
   defaultValue?: string | boolean;
+  disabled?: boolean;
 }
 
 export interface GridActionDialogData {
@@ -29,4 +32,9 @@ export interface GridActionDialogData {
 export interface GridActionDialogResponse {
   isGoodToProceed: boolean;
   data?: object;
+}
+
+export interface EnterPasswordDialogResponse {
+  isGoodToProceed: boolean;
+  data?: string;
 }

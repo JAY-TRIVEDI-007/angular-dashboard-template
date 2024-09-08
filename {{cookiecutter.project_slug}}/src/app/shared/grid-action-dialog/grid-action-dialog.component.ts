@@ -40,9 +40,11 @@ export class GridActionDialogComponent implements OnInit {
     this.actionBtnTitle = this.data.gridAction;
 
     this.data.formFields.forEach(field => {
-      let control = new FormControl(field.defaultValue?.toString());
+      let control = new FormControl(field.defaultValue);
       if (field.required)
         control.addValidators([Validators.required]);
+      if (field.disabled == true)
+        control.disable();
       this.form.addControl(field.name, control);
     });
 
@@ -69,7 +71,7 @@ export class GridActionDialogComponent implements OnInit {
     let res: GridActionDialogResponse = {
       isGoodToProceed: false,
     };
-    if (this.form.valid) {
+    if (this.form.valid && this.form.dirty) {
       res.isGoodToProceed = true;
       res.data = this.form.value;
     }

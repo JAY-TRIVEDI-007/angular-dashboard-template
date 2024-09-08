@@ -16,7 +16,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (token) {
     let userDetails = browser.getUserDetails();
     if (routeData['isOnlyAdmin'] == true && userDetails != null) {
-      return userDetails['is_superuser'];
+      return userDetails['is_staff'];
     }
     return true;
   }

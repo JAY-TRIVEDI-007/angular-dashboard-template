@@ -11,19 +11,28 @@ export interface SignUpFormInterface {
   password: string;
 }
 
+export interface CreateUserInterface extends SignUpFormInterface {
+  is_active: boolean;
+  is_bot: boolean;
+}
+
 export interface LoginAPIResponse {
   auth_token: string;
 }
 
-export interface UserInterface {
+export interface CurrentUserInterface {
   id: number;
   email: string;
   username: string;
   first_name: string;
   last_name: string;
+  is_active: boolean;
   is_staff: boolean;
-  is_superuser: boolean;
   is_bot: boolean;
+}
+
+export interface UserInterface extends CurrentUserInterface {
+  last_login: string;
 }
 
 export interface UserProfile {
@@ -31,4 +40,9 @@ export interface UserProfile {
   username?: string;
   first_name?: string;
   last_name?: string;
+}
+
+export interface SetPassword {
+  current_password: string;
+  new_password: string;
 }

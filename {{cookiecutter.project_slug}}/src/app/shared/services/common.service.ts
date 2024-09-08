@@ -1,5 +1,5 @@
 import {Inject, Injectable, signal} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {DOCUMENT} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
@@ -7,6 +7,7 @@ import {ToasterType} from '../shared-enums';
 import {routes} from '../../app.routes';
 import {Data} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable({
@@ -18,6 +19,17 @@ export class CommonService {
   headerTitle = signal<string>('App');
   STATUS_500 = 'Unexpected Server Error.';
   STATUS_0 = 'API Server not available.';
+  datetimeOptions: object = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    timeZone: 'Europe/Paris'
+  };
+  gridPageSize = [10, 25, 50, 100];
+  askPasswordTimeout = environment.askPasswordTimeout;
 
   constructor(@Inject(DOCUMENT) private document: Document, private toastrService: ToastrService, private _titleService: Title) {
   }
@@ -83,6 +95,8 @@ export class CommonService {
           Object.keys(err?.error).forEach(key => {
             if (key != 'success') {
               msg = err.error[key];
+              let field = key.replace('_', ' ');
+              msg = msg.replace('This field', field);
               return;
             }
           });
@@ -90,7 +104,7 @@ export class CommonService {
         }
         return err.statusText;
       case 403:
-        return 'Forbidden';
+        return err.error.msg;
       default:
         return 'Unexpected error occurred.';
     }
@@ -140,5 +154,20 @@ export class CommonService {
       return route.data;
 
     return {};
+  }
+
+  formatDateTime(datetime: string): string {
+    if (datetime != null && datetime != '' && datetime != undefined) {
+      let date = new Date(datetime);
+      let formattedDate = new Intl.DateTimeFormat(environment.locale, this.datetimeOptions).format(date);
+      // return date.toLocaleString(environment.locale).toUpperCase();
+      return formattedDate.toUpperCase();
+    } else {
+      return '';
+    }
+  }
+
+  isFormControlHasError(formControl: FormControl): boolean {
+    return ((formControl.touched || formControl.dirty) && !formControl.valid);
   }
 }
